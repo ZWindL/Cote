@@ -1,0 +1,195 @@
+{
+  "name": "cote",
+  "displayName": "Cote",
+  "description": "Keep local plaintext notes beside code, with conservative location recovery.",
+  "version": "0.1.0",
+  "publisher": "cote-local",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "capabilities": {
+    "virtualWorkspaces": false,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p . && node scripts/build.cjs",
+    "watch": "tsc -w -p .",
+    "test": "npm run compile && node --test out/test/*.test.js",
+    "test:integration": "npm run compile && node scripts/integration.cjs",
+    "vscode:prepublish": "npm run compile",
+    "package": "npm run compile && vsce package --no-dependencies --allow-missing-repository --no-rewrite-relative-links"
+  },
+  "dependencies": {
+    "diff": "8.0.4",
+    "proper-lockfile": "4.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.30",
+    "@types/proper-lockfile": "4.1.4",
+    "@types/vscode": "1.96.0",
+    "@vscode/test-electron": "2.5.2",
+    "@vscode/vsce": "3.6.0",
+    "esbuild": "0.25.12",
+    "typescript": "5.8.3"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "cote.addNote",
+        "title": "Add Note",
+        "category": "Cote"
+      },
+      {
+        "command": "cote.findNote",
+        "title": "Find Note",
+        "category": "Cote"
+      },
+      {
+        "command": "cote.editNote",
+        "title": "Edit Note",
+        "category": "Cote",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "cote.saveNote",
+        "title": "Save",
+        "category": "Cote",
+        "enablement": "!commentIsEmpty"
+      },
+      {
+        "command": "cote.cancelNote",
+        "title": "Cancel Note Edit",
+        "category": "Cote"
+      },
+      {
+        "command": "cote.deleteNote",
+        "title": "Delete Note",
+        "category": "Cote",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "cote.collapseNote",
+        "title": "Collapse Note",
+        "category": "Cote",
+        "icon": "$(chevron-up)"
+      },
+      {
+        "command": "cote.reattachNote",
+        "title": "Reattach Note",
+        "category": "Cote",
+        "icon": "$(link)"
+      },
+      {
+        "command": "cote.confirmReviewed",
+        "title": "Confirm Reviewed",
+        "category": "Cote",
+        "icon": "$(check)"
+      },
+      {
+        "command": "cote.previewNote",
+        "title": "Show Note Details",
+        "category": "Cote",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "cote.retry",
+        "title": "Retry Unsaved Action",
+        "category": "Cote",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "cote.help",
+        "title": "Help",
+        "category": "Cote"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "cote.saveNote",
+          "when": "false"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "cote.addNote",
+          "when": "resourceScheme == file",
+          "group": "navigation@90"
+        }
+      ],
+      "comments/comment/context": [
+        {
+          "command": "cote.saveNote",
+          "when": "comment == coteEditing",
+          "group": "inline@1"
+        },
+        {
+          "command": "cote.cancelNote",
+          "when": "comment == coteEditing",
+          "group": "inline@2"
+        }
+      ],
+      "comments/comment/title": [
+        {
+          "command": "cote.editNote",
+          "when": "comment == coteSaved",
+          "group": "inline@1"
+        },
+        {
+          "command": "cote.deleteNote",
+          "when": "comment == coteSaved",
+          "group": "inline@2"
+        }
+      ],
+      "comments/commentThread/title": [
+        {
+          "command": "cote.collapseNote",
+          "when": "commentController == cote",
+          "group": "navigation@1"
+        },
+        {
+          "command": "cote.previewNote",
+          "when": "commentController == cote",
+          "group": "navigation@2"
+        },
+        {
+          "command": "cote.confirmReviewed",
+          "when": "commentThread == coteReview",
+          "group": "navigation@3"
+        },
+        {
+          "command": "cote.reattachNote",
+          "when": "commentController == cote",
+          "group": "navigation@4"
+        },
+        {
+          "command": "cote.retry",
+          "when": "commentThread == coteError",
+          "group": "navigation@5"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "cote.addNote",
+        "key": "ctrl+alt+n",
+        "mac": "cmd+alt+n",
+        "when": "editorTextFocus && resourceScheme == file"
+      }
+    ]
+  },
+  "private": true
+}

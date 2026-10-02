@@ -1,0 +1,15 @@
+src/**
+test/**
+scripts/**
+.vscode/**
+.vscode-test/**
+test-results/**
+node_modules/**
+out/**
+AGENTS.md
+.gitignore
+**/*.map
+tsconfig.json
+package-lock.json
+pnpm-lock.yaml
+pnpm-workspace.yaml

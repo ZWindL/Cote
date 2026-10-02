@@ -1,0 +1,333 @@
+[
+  {
+    "name": "restart: identical snapshot",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "status": "attached",
+    "evidence": "identical-snapshot"
+  },
+  {
+    "name": "external insertion above",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "new header\nheading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "status": "attached"
+  },
+  {
+    "name": "external deletion above",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "function check() {\n  TARGET\n}\nfooter\n",
+    "status": "attached"
+  },
+  {
+    "name": "live insertion above",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "new header\nheading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "status": "attached",
+    "edits": [
+      {
+        "start": 0,
+        "end": 0,
+        "text": "new header\n"
+      }
+    ],
+    "evidence": "live-edit"
+  },
+  {
+    "name": "live deletion above",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "function check() {\n  TARGET\n}\nfooter\n",
+    "status": "attached",
+    "edits": [
+      {
+        "start": 0,
+        "end": 8,
+        "text": ""
+      }
+    ]
+  },
+  {
+    "name": "live insertion exactly at start excludes inserted text",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "heading\nfunction check() {\n  newTARGET\n}\nfooter\n",
+    "status": "attached",
+    "edits": [
+      {
+        "start": 29,
+        "end": 29,
+        "text": "new"
+      }
+    ]
+  },
+  {
+    "name": "live insertion exactly at end excludes inserted text",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "heading\nfunction check() {\n  TARGETnew\n}\nfooter\n",
+    "status": "attached",
+    "edits": [
+      {
+        "start": 35,
+        "end": 35,
+        "text": "new"
+      }
+    ]
+  },
+  {
+    "name": "replacement after boundary excludes replaced text",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "heading\nfunction check() {\n  TARGETnext}\nfooter\n",
+    "status": "attached",
+    "edits": [
+      {
+        "start": 35,
+        "end": 36,
+        "text": "next"
+      }
+    ]
+  },
+  {
+    "name": "live interior insertion needs review",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "heading\nfunction check() {\n  TARXGET\n}\nfooter\n",
+    "status": "needs-review",
+    "selected": "TARXGET",
+    "edits": [
+      {
+        "start": 32,
+        "end": 32,
+        "text": "X"
+      }
+    ]
+  },
+  {
+    "name": "live partial deletion needs review",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "heading\nfunction check() {\n  TAET\n}\nfooter\n",
+    "status": "needs-review",
+    "selected": "TAET",
+    "edits": [
+      {
+        "start": 31,
+        "end": 33,
+        "text": ""
+      }
+    ]
+  },
+  {
+    "name": "live replacement needs review",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "heading\nfunction check() {\n  CHANGED\n}\nfooter\n",
+    "status": "needs-review",
+    "selected": "CHANGED",
+    "edits": [
+      {
+        "start": 29,
+        "end": 35,
+        "text": "CHANGED"
+      }
+    ]
+  },
+  {
+    "name": "external uniquely bracketed replacement",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "heading\nfunction check() {\n  CHANGED\n}\nfooter\n",
+    "status": "needs-review",
+    "selected": "CHANGED",
+    "evidence": "bracketed-replacement"
+  },
+  {
+    "name": "live full deletion unresolved",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "heading\nfunction check() {\n  \n}\nfooter\n",
+    "status": "unresolved",
+    "edits": [
+      {
+        "start": 29,
+        "end": 35,
+        "text": ""
+      }
+    ],
+    "reason": "deleted-target"
+  },
+  {
+    "name": "external full deletion unresolved",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "heading\nfunction check() {\n  \n}\nfooter\n",
+    "status": "unresolved",
+    "reason": "deleted-target"
+  },
+  {
+    "name": "full document replacement cannot map an interior note",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "unrelated",
+    "status": "unresolved",
+    "edits": [
+      {
+        "start": 0,
+        "end": 45,
+        "text": "unrelated"
+      }
+    ]
+  },
+  {
+    "name": "branch switch away loses target",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "other branch\n",
+    "status": "unresolved"
+  },
+  {
+    "name": "discard unsaved-only passage",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\nunsaved only",
+    "start": 45,
+    "end": 57,
+    "target": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "status": "unresolved"
+  },
+  {
+    "name": "unique snippet with contradictory context stays unresolved",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "unrelated\nTARGET\nunrelated\n",
+    "status": "unresolved"
+  },
+  {
+    "name": "indistinguishable duplicated context rejects nearest line",
+    "baseline": "a\nb\nc\nTARGET\nd\ne\nf\na\nb\nc\nTARGET\nd\ne\nf\n",
+    "start": 6,
+    "end": 12,
+    "target": "new\na\nb\nc\nTARGET\nd\ne\nf\na\nb\nc\nTARGET\nd\ne\nf\n",
+    "status": "unresolved",
+    "reason": "ambiguous-match"
+  },
+  {
+    "name": "duplicate snippet with unique context",
+    "baseline": "unique function\none\ntwo\nTARGET\nthree\nfour\nfive\n\nother function\nTARGET\nend\n",
+    "start": 24,
+    "end": 30,
+    "target": "header\nunique function\none\ntwo\nTARGET\nthree\nfour\nfive\n\nother function\nTARGET\nend\n",
+    "status": "attached"
+  },
+  {
+    "name": "same-file move with complete unique context",
+    "baseline": "one\ntwo\nthree\nTARGET\nfour\nfive\nsix\n\nother\n",
+    "start": 14,
+    "end": 20,
+    "target": "unrelated A\nunrelated B\none\ntwo\nthree\nTARGET\nfour\nfive\nsix\n",
+    "status": "attached"
+  },
+  {
+    "name": "rewritten target without brackets unresolved",
+    "baseline": "heading\nfunction check() {\n  TARGET\n}\nfooter\n",
+    "start": 29,
+    "end": 35,
+    "target": "renamed function\nCHANGED\n",
+    "status": "unresolved"
+  },
+  {
+    "name": "blank line exact contextual recovery",
+    "baseline": "before\n\nafter\n",
+    "start": 7,
+    "end": 7,
+    "target": "prefix\nbefore\n\nafter\n",
+    "status": "attached"
+  },
+  {
+    "name": "blank line live insertion at position moves anchor",
+    "baseline": "before\n\nafter\n",
+    "start": 7,
+    "end": 7,
+    "target": "before\ninserted\nafter\n",
+    "status": "attached",
+    "edits": [
+      {
+        "start": 7,
+        "end": 7,
+        "text": "inserted"
+      }
+    ]
+  },
+  {
+    "name": "blank line lost context unresolved",
+    "baseline": "before\n\nafter\n",
+    "start": 7,
+    "end": 7,
+    "target": "other\n\ntext\n",
+    "status": "unresolved"
+  },
+  {
+    "name": "CRLF snapshot preserved",
+    "baseline": "before\r\nTARGET\r\nafter\r\n",
+    "start": 8,
+    "end": 14,
+    "target": "before\r\nTARGET\r\nafter\r\n",
+    "status": "attached"
+  },
+  {
+    "name": "CRLF to LF is explicit EOL-only evidence",
+    "baseline": "before\r\nTARGET\r\nafter\r\n",
+    "start": 8,
+    "end": 14,
+    "target": "before\nTARGET\nafter\n",
+    "status": "attached",
+    "evidence": "line-endings-only"
+  },
+  {
+    "name": "multiline CRLF to LF remains attached",
+    "baseline": "before\r\nTARGET\r\nafter\r\n",
+    "start": 8,
+    "end": 16,
+    "target": "before\nTARGET\nafter\n",
+    "status": "attached",
+    "selected": "TARGET\n",
+    "evidence": "line-endings-only"
+  },
+  {
+    "name": "multiline end-exclusive selection",
+    "baseline": "before\nfirst\nsecond\nafter",
+    "start": 7,
+    "end": 20,
+    "target": "prefix\nbefore\nfirst\nsecond\nafter",
+    "status": "attached"
+  },
+  {
+    "name": "Unicode surrogate and combining text",
+    "baseline": "before\n👋é你好\nafter\n",
+    "start": 7,
+    "end": 14,
+    "target": "prefix\nbefore\n👋é你好\nafter\n",
+    "status": "attached",
+    "selected": "👋é你好\n"
+  }
+]
